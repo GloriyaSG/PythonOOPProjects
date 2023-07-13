@@ -1,5 +1,5 @@
 from typing import List
-from project.album import Album
+from person.project import Album
 
 class Band:
     def __init__(self, name):
