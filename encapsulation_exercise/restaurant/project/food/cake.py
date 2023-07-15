@@ -7,4 +7,4 @@ class Cake(Dessert):
     PRICE = 5
 
     def __init__(self, name: str):
-        super().__init__(name, Cake.GRAMS, Cake.PRICE, Cake.CALORIES
+        super().__init__(name, Cake.GRAMS, Cake.PRICE, Cake.CALORIES)
