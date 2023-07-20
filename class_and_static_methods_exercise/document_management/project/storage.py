@@ -29,4 +29,36 @@ class Storage:
         category.name = new_name
 
     def edit_topic(self, topic_id: int, new_topic: str, new_storage_folder: str):
-        pass
+        topic =  [topic for topic in self.topics if topic_id == topic.id][0]
+        topic.topic = new_topic
+        topic.storage_folder = new_storage_folder
+
+    def edit_document(self, document_id: int, new_file_name: str):
+        document = [document for document in self.documents if document_id == document.id][0]
+        document.file_name = new_file_name
+
+    def delete_category(self, category_id):
+        category = [category for category in self.categories if category_id == category.id][0]
+        self.categories.remove(category)
+
+    def delete_topic(self, topic_id):
+        topic = [topic for topic in self.topics if topic_id == topic.id][0]
+        self.topics.remove(topic)
+
+    def delete_document(self, document_id):
+        document = [document for document in self.documents if document_id == document.id][0]
+        self.documents.remove(document)
+
+    def get_document(self, document_id):
+        document = [document for document in self.documents if document_id == document.id][0]
+        return document
+
+    def __repr__(self):
+        docs = []
+
+        for document in self.documents:
+            docs.append(str(document))
+
+        return '\n'.join(docs)
+
+
