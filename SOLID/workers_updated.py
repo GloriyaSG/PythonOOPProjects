@@ -37,7 +37,7 @@ class SuperWorker(Workable, Eatable):
 class Robot(Workable):
 
     def work(self):
-        print("I'm a robot. I'm working....")
+        print("I'm a robots. I'm working....")
 
 
 class Manager(ABC):
