@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/classes_and_objects_exercise/guild/project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/classes_and_objects_exercise/task/project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/decorators_exercise/09. Computer Store_Skeleton/project" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/testing_exercise/01. Mammal_Skeleton/mammal" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/testing_exercise/02. Vehicle_Skeleton/vehicle" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
