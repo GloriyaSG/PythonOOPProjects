@@ -6,7 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/classes_and_objects_exercise/guild/project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/classes_and_objects_exercise/task/project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/decorators_exercise/09. Computer Store_Skeleton/project" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/exam_preparations/18_april_2022/03.Unit-Testing-Skeleton" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
