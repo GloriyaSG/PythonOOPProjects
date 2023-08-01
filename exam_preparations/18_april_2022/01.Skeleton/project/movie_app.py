@@ -1,9 +1,6 @@
 from typing import List
 
 from project.movie_specification.movie import Movie
-from project.movie_specification.action import Action
-from project.movie_specification.fantasy import Fantasy
-from project.movie_specification.thriller import Thriller
 from project.user import User
 
 
