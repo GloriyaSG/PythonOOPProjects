@@ -13,7 +13,7 @@ class Drummer(Musician):
         if new_skill not in self.VALID_SKILLS:
             raise ValueError(f"{new_skill} is not a needed skill!")
 
-        if new_skill in self.skills:
+        elif new_skill in self.skills:
             raise Exception(f"{new_skill} is already learned!")
 
         self.skills.append(new_skill)
