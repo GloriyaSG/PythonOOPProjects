@@ -58,5 +58,6 @@ class TestTennisPlayer(TestCase):
 
         self.assertEqual(str(self.player), result)
 
+
 if __name__ == '__main__':
     main()
