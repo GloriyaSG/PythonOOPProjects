@@ -77,71 +77,66 @@ class ConcertTrackerApp:
         return f"{musician_name} was removed from {band_name}."
 
     def start_concert(self, concert_place: str, band_name: str):
+        band = [b for b in self.bands if b.name == band_name][0]
+        dictionary_count = {"Guitarist": 0,
+                            "Drummer": 0,
+                            "Singer": 0}
 
-        valid_band_count = {
-            "Guitarist": 0,
-            "Drummer": 0,
-            "Singer": 0,
+        required_skills = {
+            "Rock": ["play the drums with drumsticks", "sing high pitch notes", "play rock"],
+            "Metal": ["play the drums with drumsticks", "sing low pitch notes", "play metal"],
+            "Jazz": ["play the drums with drum brushes", "sing high pitch notes", "sing low pitch notes", "play jazz"]
         }
 
-        band = [b for b in self.bands if b.name == band_name][0]
-        for person in band.members:
-            if person.__class__.__name__ in valid_band_count.keys():
-                valid_band_count[person.__class__.__name__] += 1
+        for member in band.members:
+            if member.__class__.__name__ in ConcertTrackerApp.VALID_MUSICIANS.keys():
+                dictionary_count[member.__class__.__name__] += 1
 
-        if valid_band_count["Guitarist"] < 1 or valid_band_count["Drummer"] < 1 or valid_band_count["Singer"] < 1:
+        if not (dictionary_count["Guitarist"] and dictionary_count["Drummer"] and dictionary_count["Singer"]):
             raise Exception(f"{band_name} can't start the concert because it doesn't have enough members!")
 
-        concert = [c for c in self.concerts if c.place == concert_place][0]
+        curr_skills = []
+        for member in band.members:
+            for skill in member.skills:
+                curr_skills.append(skill)
 
-        if concert.genre == "Rock":
-            for pers in band.members:
-                if pers.__class__.__name__ == "Drummer" and "play the drums with drumsticks" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
+        concert_happening = False
 
-                if pers.__class__.__name__ == "Singer" and "sing high pitch notes" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to sing at the concert!")
+        for c_genre, skills in required_skills.items():
+            counter = 0
 
-                if pers.__class__.__name__ == "Guitarist" and "play rock" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
+            for s in skills:
+                if s in curr_skills:
+                    counter += 1
 
-        elif concert.genre == "Metal":
-            for pers in band.members:
-                if pers.__class__.__name__ == 'Drummer' and "play the drums with drumsticks" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if pers.__class__.__name__ == 'Singer' and "sing low pitch notes" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if pers.__class__.__name__ == 'Guitarist' and "play metal" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
+            if (counter == 3 and (c_genre == "Rock" or c_genre == "Metal")) or (counter == 4 and c_genre == "Jazz"):
+                concert_happening = True
+                break
 
-        elif concert.genre == "Jazz":
-            for pers in band.members:
-                if pers.__class__.__name__ == 'Drummer' \
-                        and "play the drums with drum brushes" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if pers.__class__.__name__ == 'Singer' \
-                        and ("sing low pitch notes" not in pers.skills
-                             or "sing high pitch notes" not in pers.skills):
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if pers.__class__.__name__ == 'Guitarist' and "play jazz" not in pers.skills:
-                    raise Exception(f"The {band_name} band is not ready to play at the concert!")
+        if not concert_happening:
+            raise Exception(f"The {band_name} band is not ready to play at the concert!")
 
-        profit = (concert.audience * concert.ticket_price) - concert.expenses
-        return f"{band_name} gained {profit:.2f}$ from the {concert.genre} concert in {concert.place}."
+        curr_concert = [c for c in self.concerts if c.place == concert_place][0]
+        profit = (curr_concert.audience * curr_concert.ticket_price) - curr_concert.expenses
+        return f"{band_name} gained {profit:.2f}$ from the {curr_concert.genre} concert in {concert_place}."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # musician_types = ["Singer", "Drummer", "Guitarist"]
+    # names = ["George", "Alex", "Lilly"]
+    #
+    # app = ConcertTrackerApp()
+    #
+    # for i in range(3):
+    #     print(app.create_musician(musician_types[i], names[i], 20))
+    #
+    # print(app.musicians[0].learn_new_skill("sing high pitch notes"))
+    # print(app.musicians[1].learn_new_skill("play the drums with drumsticks"))
+    # print(app.musicians[2].learn_new_skill("play rock"))
+    #
+    # print(app.create_band("RockName"))
+    # for i in range(3):
+    #     print(app.add_musician_to_band(names[i], "RockName"))
+    #
+    # print(app.create_concert("Rock", 20, 5.20, 56.7, "Sofia"))
+    #
+    # print(list(map(lambda a: a.__class__.__name__, app.bands[0].members)))
+    # print(app.start_concert("Sofia", "RockName"))
