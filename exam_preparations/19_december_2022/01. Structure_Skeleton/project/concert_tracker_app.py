@@ -1,5 +1,3 @@
-from typing import List
-
 from project.concert import Concert
 from project.band_members.drummer import Drummer
 from project.band_members.guitarist import Guitarist
@@ -23,7 +21,7 @@ class ConcertTrackerApp:
     def create_musician(self, musician_type: str, name: str, age: int):
 
         if musician_type not in ConcertTrackerApp.VALID_MUSICIANS.keys():
-            raise ValueError(f"Invalid musician type!")
+            raise ValueError("Invalid musician type!")
 
         for person in self.musicians:
             if person.name == name:
@@ -97,36 +95,37 @@ class ConcertTrackerApp:
         concert = [c for c in self.concerts if c.place == concert_place][0]
 
         if concert.genre == "Rock":
-            for band_member in band.members:
-                if band_member.__class__.__name__ == "Drummer" and "play the drums with drumsticks" not in band_member.skills:
+            for pers in band.members:
+                if pers.__class__.__name__ == "Drummer" and "play the drums with drumsticks" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
 
-                if band_member.__class__.__name__ == "Singer" and "sing high pitch notes" not in band_member.skills:
+                if pers.__class__.__name__ == "Singer" and "sing high pitch notes" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to sing at the concert!")
 
-                if band_member.__class__.__name__ == "Guitarist" and "play rock" not in band_member.skills:
+                if pers.__class__.__name__ == "Guitarist" and "play rock" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
 
         elif concert.genre == "Metal":
-            for band_member in band.members:
-                if band_member.__class__.__name__ == 'Drummer' and "play the drums with drumsticks" not in band_member.skills:
+            for pers in band.members:
+                if pers.__class__.__name__ == 'Drummer' and "play the drums with drumsticks" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if band_member.__class__.__name__ == 'Singer' and "sing low pitch notes" not in band_member.skills:
+                if pers.__class__.__name__ == 'Singer' and "sing low pitch notes" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if band_member.__class__.__name__ == 'Guitarist' and "play metal" not in band_member.skills:
+                if pers.__class__.__name__ == 'Guitarist' and "play metal" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
 
         elif concert.genre == "Jazz":
-            for band_member in band.members:
-                if band_member.__class__.__name__ == 'Drummer' \
-                        and "play the drums with drum brushes" not in band_member.skills:
+            for pers in band.members:
+                if pers.__class__.__name__ == 'Drummer' \
+                        and "play the drums with drum brushes" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if band_member.__class__.__name__ == 'Singer' \
-                        and ("sing low pitch notes" not in band_member.skills
-                             or "sing high pitch notes" not in band_member.skills):
+                if pers.__class__.__name__ == 'Singer' \
+                        and ("sing low pitch notes" not in pers.skills
+                             or "sing high pitch notes" not in pers.skills):
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
-                if band_member.__class__.__name__ == 'Guitarist' and "play jazz" not in band_member.skills:
+                if pers.__class__.__name__ == 'Guitarist' and "play jazz" not in pers.skills:
                     raise Exception(f"The {band_name} band is not ready to play at the concert!")
+
         profit = (concert.audience * concert.ticket_price) - concert.expenses
         return f"{band_name} gained {profit:.2f}$ from the {concert.genre} concert in {concert.place}."
 
